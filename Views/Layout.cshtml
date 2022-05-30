@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title> Hotel @ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />
+    <style>
+        body { padding-top: 60px;}
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="cointainer">
+            <div class="navbar header">
+                <div class="navbar-brand pr-2">Hotel</div>
+                <div class="navbar-brand pr-2">@Html.ActionLink("Home", "Index", "Home")</div>
+                <div class="navbar-brand pr-2">@Html.ActionLink("Categorias", "Index", "Categoria")</div>
+                <div class="navbar-brand pr-2">@Html.ActionLink("Cidades", "Index", "Cidade")</div>
+                <div class="navbar-brand pr-2">@Html.ActionLink("Estabelecimentos", "Index", "Estabelecimento")</div>
+                <div class="navbar-brand pr-2">@Html.ActionLink("Quartos", "Index", "Quarto")</div>
+                <div class="navbar-brand pr-2">@Html.ActionLink("Tipos de Quartos", "Index", "TipoQuarto")</div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script src="@Url.Content("~/Scripts/Jquey-3.6.0.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    @RenderSection("Scripts",required: false)
+</body>
+</html>

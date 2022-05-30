@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="IdCidade" />
+          </Key>
+          <Property Name="IdCidade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estabelecimento">
+          <Key>
+            <PropertyRef Name="IdEstabelecimento" />
+          </Key>
+          <Property Name="IdEstabelecimento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCidade" Type="int" Nullable="false" />
+          <Property Name="IdCategoria" Type="int" Nullable="false" />
+          <Property Name="NomeComercial" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RazaoSocial" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Site" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quarto">
+          <Key>
+            <PropertyRef Name="IdQuarto" />
+          </Key>
+          <Property Name="IdQuarto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEstabelecimento" Type="int" Nullable="false" />
+          <Property Name="IdTipoQuarto" Type="int" Nullable="false" />
+          <Property Name="NumeroQuarto" Type="int" Nullable="false" />
+          <Property Name="Disponivel" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoQuarto">
+          <Key>
+            <PropertyRef Name="IdTipoQuarto" />
+          </Key>
+          <Property Name="IdTipoQuarto" Type="int" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="ValorDiaria" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CafeManha" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Estabelec__IdCat__2B3F6F97">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Estabelecimento">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estabelec__IdCid__2A4B4B5E">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="IdCidade" />
+            </Principal>
+            <Dependent Role="Estabelecimento">
+              <PropertyRef Name="IdCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarto__IdEstabe__300424B4">
+          <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="1" />
+          <End Role="Quarto" Type="Self.Quarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estabelecimento">
+              <PropertyRef Name="IdEstabelecimento" />
+            </Principal>
+            <Dependent Role="Quarto">
+              <PropertyRef Name="IdEstabelecimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarto__IdTipoQu__30F848ED">
+          <End Role="TipoQuarto" Type="Self.TipoQuarto" Multiplicity="1" />
+          <End Role="Quarto" Type="Self.Quarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoQuarto">
+              <PropertyRef Name="IdTipoQuarto" />
+            </Principal>
+            <Dependent Role="Quarto">
+              <PropertyRef Name="IdTipoQuarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelDBModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estabelecimento" EntityType="Self.Estabelecimento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quarto" EntityType="Self.Quarto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoQuarto" EntityType="Self.TipoQuarto" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Estabelec__IdCat__2B3F6F97" Association="Self.FK__Estabelec__IdCat__2B3F6F97">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Estabelecimento" EntitySet="Estabelecimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estabelec__IdCid__2A4B4B5E" Association="Self.FK__Estabelec__IdCid__2A4B4B5E">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Estabelecimento" EntitySet="Estabelecimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarto__IdEstabe__300424B4" Association="Self.FK__Quarto__IdEstabe__300424B4">
+            <End Role="Estabelecimento" EntitySet="Estabelecimento" />
+            <End Role="Quarto" EntitySet="Quarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarto__IdTipoQu__30F848ED" Association="Self.FK__Quarto__IdTipoQu__30F848ED">
+            <End Role="TipoQuarto" EntitySet="TipoQuarto" />
+            <End Role="Quarto" EntitySet="Quarto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Estabelecimento" Relationship="Self.FK__Estabelec__IdCat__2B3F6F97" FromRole="Categoria" ToRole="Estabelecimento" />
+        </EntityType>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="IdCidade" />
+          </Key>
+          <Property Name="IdCidade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Estabelecimento" Relationship="Self.FK__Estabelec__IdCid__2A4B4B5E" FromRole="Cidade" ToRole="Estabelecimento" />
+        </EntityType>
+        <EntityType Name="Estabelecimento">
+          <Key>
+            <PropertyRef Name="IdEstabelecimento" />
+          </Key>
+          <Property Name="IdEstabelecimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCidade" Type="Int32" Nullable="false" />
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" />
+          <Property Name="NomeComercial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RazaoSocial" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Site" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK__Estabelec__IdCat__2B3F6F97" FromRole="Estabelecimento" ToRole="Categoria" />
+          <NavigationProperty Name="Cidade" Relationship="Self.FK__Estabelec__IdCid__2A4B4B5E" FromRole="Estabelecimento" ToRole="Cidade" />
+          <NavigationProperty Name="Quarto" Relationship="Self.FK__Quarto__IdEstabe__300424B4" FromRole="Estabelecimento" ToRole="Quarto" />
+        </EntityType>
+        <EntityType Name="Quarto">
+          <Key>
+            <PropertyRef Name="IdQuarto" />
+          </Key>
+          <Property Name="IdQuarto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdEstabelecimento" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoQuarto" Type="Int32" Nullable="false" />
+          <Property Name="NumeroQuarto" Type="Int32" Nullable="false" />
+          <Property Name="Disponivel" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Estabelecimento" Relationship="Self.FK__Quarto__IdEstabe__300424B4" FromRole="Quarto" ToRole="Estabelecimento" />
+          <NavigationProperty Name="TipoQuarto" Relationship="Self.FK__Quarto__IdTipoQu__30F848ED" FromRole="Quarto" ToRole="TipoQuarto" />
+        </EntityType>
+        <EntityType Name="TipoQuarto">
+          <Key>
+            <PropertyRef Name="IdTipoQuarto" />
+          </Key>
+          <Property Name="IdTipoQuarto" Type="Int32" Nullable="false" />
+          <Property Name="Descricao" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ValorDiaria" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CafeManha" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Quarto" Relationship="Self.FK__Quarto__IdTipoQu__30F848ED" FromRole="TipoQuarto" ToRole="Quarto" />
+        </EntityType>
+        <Association Name="FK__Estabelec__IdCat__2B3F6F97">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Estabelecimento">
+              <PropertyRef Name="IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estabelec__IdCid__2A4B4B5E">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="1" />
+          <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="IdCidade" />
+            </Principal>
+            <Dependent Role="Estabelecimento">
+              <PropertyRef Name="IdCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarto__IdEstabe__300424B4">
+          <End Role="Estabelecimento" Type="Self.Estabelecimento" Multiplicity="1" />
+          <End Role="Quarto" Type="Self.Quarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estabelecimento">
+              <PropertyRef Name="IdEstabelecimento" />
+            </Principal>
+            <Dependent Role="Quarto">
+              <PropertyRef Name="IdEstabelecimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Quarto__IdTipoQu__30F848ED">
+          <End Role="TipoQuarto" Type="Self.TipoQuarto" Multiplicity="1" />
+          <End Role="Quarto" Type="Self.Quarto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoQuarto">
+              <PropertyRef Name="IdTipoQuarto" />
+            </Principal>
+            <Dependent Role="Quarto">
+              <PropertyRef Name="IdTipoQuarto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" />
+          <EntitySet Name="Estabelecimento" EntityType="Self.Estabelecimento" />
+          <EntitySet Name="Quarto" EntityType="Self.Quarto" />
+          <EntitySet Name="TipoQuarto" EntityType="Self.TipoQuarto" />
+          <AssociationSet Name="FK__Estabelec__IdCat__2B3F6F97" Association="Self.FK__Estabelec__IdCat__2B3F6F97">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Estabelecimento" EntitySet="Estabelecimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estabelec__IdCid__2A4B4B5E" Association="Self.FK__Estabelec__IdCid__2A4B4B5E">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Estabelecimento" EntitySet="Estabelecimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarto__IdEstabe__300424B4" Association="Self.FK__Quarto__IdEstabe__300424B4">
+            <End Role="Estabelecimento" EntitySet="Estabelecimento" />
+            <End Role="Quarto" EntitySet="Quarto" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Quarto__IdTipoQu__30F848ED" Association="Self.FK__Quarto__IdTipoQu__30F848ED">
+            <End Role="TipoQuarto" EntitySet="TipoQuarto" />
+            <End Role="Quarto" EntitySet="Quarto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelDBModelStoreContainer" CdmEntityContainer="HotelDBEntities">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="HotelDBModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="HotelDBModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estabelecimento">
+            <EntityTypeMapping TypeName="HotelDBModel.Estabelecimento">
+              <MappingFragment StoreEntitySet="Estabelecimento">
+                <ScalarProperty Name="IdEstabelecimento" ColumnName="IdEstabelecimento" />
+                <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="NomeComercial" ColumnName="NomeComercial" />
+                <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Site" ColumnName="Site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quarto">
+            <EntityTypeMapping TypeName="HotelDBModel.Quarto">
+              <MappingFragment StoreEntitySet="Quarto">
+                <ScalarProperty Name="IdQuarto" ColumnName="IdQuarto" />
+                <ScalarProperty Name="IdEstabelecimento" ColumnName="IdEstabelecimento" />
+                <ScalarProperty Name="IdTipoQuarto" ColumnName="IdTipoQuarto" />
+                <ScalarProperty Name="NumeroQuarto" ColumnName="NumeroQuarto" />
+                <ScalarProperty Name="Disponivel" ColumnName="Disponivel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoQuarto">
+            <EntityTypeMapping TypeName="HotelDBModel.TipoQuarto">
+              <MappingFragment StoreEntitySet="TipoQuarto">
+                <ScalarProperty Name="IdTipoQuarto" ColumnName="IdTipoQuarto" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="ValorDiaria" ColumnName="ValorDiaria" />
+                <ScalarProperty Name="CafeManha" ColumnName="CafeManha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

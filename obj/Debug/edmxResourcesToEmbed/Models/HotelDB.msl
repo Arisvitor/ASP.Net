@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HotelDBModelStoreContainer" CdmEntityContainer="HotelDBEntities">
+    <EntitySetMapping Name="Categoria">
+      <EntityTypeMapping TypeName="HotelDBModel.Categoria">
+        <MappingFragment StoreEntitySet="Categoria">
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cidade">
+      <EntityTypeMapping TypeName="HotelDBModel.Cidade">
+        <MappingFragment StoreEntitySet="Cidade">
+          <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="UF" ColumnName="UF" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estabelecimento">
+      <EntityTypeMapping TypeName="HotelDBModel.Estabelecimento">
+        <MappingFragment StoreEntitySet="Estabelecimento">
+          <ScalarProperty Name="IdEstabelecimento" ColumnName="IdEstabelecimento" />
+          <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
+          <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+          <ScalarProperty Name="NomeComercial" ColumnName="NomeComercial" />
+          <ScalarProperty Name="RazaoSocial" ColumnName="RazaoSocial" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Site" ColumnName="Site" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quarto">
+      <EntityTypeMapping TypeName="HotelDBModel.Quarto">
+        <MappingFragment StoreEntitySet="Quarto">
+          <ScalarProperty Name="IdQuarto" ColumnName="IdQuarto" />
+          <ScalarProperty Name="IdEstabelecimento" ColumnName="IdEstabelecimento" />
+          <ScalarProperty Name="IdTipoQuarto" ColumnName="IdTipoQuarto" />
+          <ScalarProperty Name="NumeroQuarto" ColumnName="NumeroQuarto" />
+          <ScalarProperty Name="Disponivel" ColumnName="Disponivel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoQuarto">
+      <EntityTypeMapping TypeName="HotelDBModel.TipoQuarto">
+        <MappingFragment StoreEntitySet="TipoQuarto">
+          <ScalarProperty Name="IdTipoQuarto" ColumnName="IdTipoQuarto" />
+          <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+          <ScalarProperty Name="ValorDiaria" ColumnName="ValorDiaria" />
+          <ScalarProperty Name="CafeManha" ColumnName="CafeManha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
